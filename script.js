@@ -47,7 +47,6 @@ function updateTaskList() {
         deleteBtn.textContent = "Delete";
         deleteBtn.className = "delete-btn";
         deleteBtn.addEventListener("click", () => removeTask(index));
-
         actionsContainer.appendChild(editBtn);
         actionsContainer.appendChild(deleteBtn);
         li.appendChild(actionsContainer);
