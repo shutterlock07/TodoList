@@ -61,9 +61,23 @@ li {
     cursor: pointer;
 }
 
+.status-btn {
+    background-color: #45a049;
+    cursor: pointer;
+}
+
 .actions {
     margin-left: auto;
     display: flex;
     justify-content: flex-end;
     gap: 5px;
+}
+
+.task-text {
+    flex: 1;
+}
+
+.done {
+    text-decoration: line-through;
+    color: #888;
 }
