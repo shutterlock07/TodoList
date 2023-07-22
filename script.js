@@ -296,37 +296,62 @@ function updateTaskList(filteredTasks = tasks) {
         const li = document.createElement("li");
         li.className = "task-item";
 
-        const taskTextElement = document.createElement("p");
+        const readContainer = document.createElement("div");
+        readContainer.className = "readContainer";
+
+        // Div 1
+        const taskDiv1 = document.createElement("div");
+        taskDiv1.className = "taskDiv1";
+
+        const priorityElement = document.createElement("div");
+        priorityElement.textContent = task.priority;
+        priorityElement.classList.add("priority");
+        taskDiv1.appendChild(priorityElement);
+        if (task.priority == "High") {
+            priorityElement.classList.add("high")
+        }
+        else if (task.priority == "Medium") {
+            priorityElement.classList.add("medium")
+        }
+        else {
+            priorityElement.classList.add("low")
+        }
+
+        const dueDateElement = document.createElement("div");
+        dueDateElement.textContent = task.dueDate;
+        dueDateElement.classList.add("due-date");
+        taskDiv1.appendChild(dueDateElement);
+
+
+        // Div2
+        const taskTextElement = document.createElement("div");
         taskTextElement.textContent = task.text;
         taskTextElement.classList.add("task-text");
 
 
-        const dueDateElement = document.createElement("span");
-        dueDateElement.textContent = task.dueDate;
-        dueDateElement.classList.add("due-date");
-        li.appendChild(dueDateElement);
+        // Div 3
+        const taskDiv3 = document.createElement("div");
+        taskDiv3.className = "taskDiv3";
 
-        const priorityElement = document.createElement("span");
-        priorityElement.textContent = task.priority;
-        priorityElement.classList.add("priority");
-        li.appendChild(priorityElement);
-
-        const categoryElement = document.createElement("p");
+        const categoryElement = document.createElement("div");
         categoryElement.textContent = task.category;
         categoryElement.classList.add("category");
-        li.appendChild(categoryElement);
+        taskDiv3.appendChild(categoryElement);
 
-        const tagsElement = document.createElement("span");
+        const tagsElement = document.createElement("div");
         tagsElement.textContent = task.tags; // Join tags with commas
         tagsElement.classList.add("tags");
-        li.appendChild(tagsElement);
+        taskDiv3.appendChild(tagsElement);
+
 
         if (task.done) {
             taskTextElement.classList.add("done");
             dueDateElement.classList.add("done");
             priorityElement.classList.add("done");
             categoryElement.classList.add("done");
+            tagsElement.classList.add("done");
         }
+
 
         const actionsContainer = document.createElement("div");
         actionsContainer.className = "actions";
@@ -346,12 +371,15 @@ function updateTaskList(filteredTasks = tasks) {
         deleteBtn.className = "delete-btn";
         deleteBtn.addEventListener("click", () => removeTask(index));
 
+        readContainer.appendChild(taskDiv1);
+        readContainer.appendChild(taskTextElement);
+        readContainer.appendChild(taskDiv3);
 
         actionsContainer.appendChild(editBtn);
         actionsContainer.appendChild(statusBtn);
         actionsContainer.appendChild(deleteBtn);
 
-        li.appendChild(taskTextElement);
+        li.appendChild(readContainer);
         li.appendChild(actionsContainer);
 
         taskList.appendChild(li);

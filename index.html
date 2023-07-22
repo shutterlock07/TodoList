@@ -14,8 +14,8 @@
         <div class="todo">
             <div class="todo1">
                 <input type="text" id="taskInput" placeholder="Enter task">
-                <input type="date" id="dueDateInput">
-                <select id="priority" name="priority" aria-placeholder="Priority">
+                <input type="date" id="dueDateInput" style="height:24px">
+                <select id="priority" name="priority" aria-placeholder="Priority" style="height:24px; width: 15%px;">
                     <option value="High">High</option>
                     <option value="Medium">Medium</option>
                     <option value="Low">Low</option>
@@ -34,11 +34,11 @@
             <h3>Filter Options</h3>
             <div>
                 <label for="startDate">Start Date:</label>
-                <input type="date" id="startDate">
+                <input type="date" id="startDate" style="height:24px">
             </div>
             <div>
                 <label for="endDate">End Date:</label>
-                <input type="date" id="endDate">
+                <input type="date" id="endDate" style="height:24px">
             </div>
 
             <button id="filterBtn">Filter</button>
@@ -46,8 +46,8 @@
 
         <div class="filter">
             <div class="priorityFilter">
-                <label for="priorityFilter">Priority</label>
-                <select id="priorityFilter" name="priorityFilter" aria-placeholder="Priority">
+                <label for="priorityFilter">Priority: </label>
+                <select id="priorityFilter" name="priorityFilter" aria-placeholder="Priority" style="height:24px">
                     <option value="None">None</option>
                     <option value="High">High</option>
                     <option value="Medium">Medium</option>
@@ -57,7 +57,7 @@
             </div>
 
             <div class="categoryFilter">
-                <label for="categoryFilter">Category</label>
+                <label for="categoryFilter">Category: </label>
                 <input type="text" id="categoryFilter" placeholder="Category">
                 <button id="filtercatBtn">Filter</button>
             </div>
@@ -89,6 +89,8 @@
 
 
         <ul id="taskList" class="task-list"></ul>
+
+
 
         <div class="activity-log" id="activityLog">
             <h2>Activity Log</h2>

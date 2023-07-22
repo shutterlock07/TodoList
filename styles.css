@@ -1,5 +1,7 @@
-body {
+body,
+html {
     font-family: Arial, sans-serif;
+    overflow-x: hidden;
 }
 
 .container {
@@ -31,7 +33,7 @@ h3 {
 .categoryFilter,
 .searchContainer {
     display: flex;
-    gap: 20px;
+    gap: 1.5%;
     align-items: center;
 }
 
@@ -107,7 +109,8 @@ li {
 }
 
 .actions {
-    margin-left: auto;
+    /* margin-left: auto; */
+
     display: flex;
     justify-content: flex-end;
     gap: 5px;
@@ -123,20 +126,19 @@ li {
 }
 
 .due-date {
-    margin-right: 25px;
+    padding-top: 10px;
 }
 
 .priority {
-    width: 90px;
+    border: 1px solid rgb(158, 103, 103);
+    border-radius: 5px;
+    padding: 5px;
 }
 
+
+
+.tags,
 .category {
-    width: 7.5%;
-    display: flex;
-}
-
-.tags {
-    margin-left: 10px;
     font-style: italic;
     color: #666;
 }
@@ -150,6 +152,51 @@ li {
     border: 1px solid #ccc;
     border-radius: 5px;
     margin: 8px 0;
-    padding: 10px;
+    padding: 0 10px 10px 0;
     background-color: #f5f5f5;
+    display: flex;
+    justify-content: space-between;
+}
+
+.readContainer {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.taskDiv1,
+.taskDiv3 {
+    display: flex;
+    flex-direction: row;
+    font-size: 12px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.taskDiv1 {
+    margin-bottom: 10px;
+}
+
+.task-text {
+    margin: 0 10px 10px;
+    padding-left: 30px;
+}
+
+.high {
+    background-color: red;
+    color: #fff;
+}
+
+.medium {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.low {
+    background-color: #a7af4c;
+    color: #fff;
+}
+
+.taskDiv3 {
+    padding-left: 40px;
 }
