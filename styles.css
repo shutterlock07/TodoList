@@ -3,7 +3,7 @@ body {
 }
 
 .container {
-    max-width: 600px;
+    max-width: 900px;
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;
@@ -47,6 +47,7 @@ li {
     margin-bottom: 25px;
     display: flex;
     align-items: center;
+    background-color: #f3f3f3;
 }
 
 .delete-btn {
@@ -74,10 +75,29 @@ li {
 }
 
 .task-text {
-    flex: 1;
+    display: flex;
 }
 
 .done {
     text-decoration: line-through;
     color: #888;
+}
+
+.due-date {
+    margin-right: 25px;
+}
+
+.priority {
+    width: 90px;
+}
+
+.category {
+    width: 7.5%;
+    display: flex;
+}
+
+.tags {
+    margin-left: 10px;
+    font-style: italic;
+    color: #666;
 }

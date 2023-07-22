@@ -13,7 +13,40 @@
         <h1>Todo App</h1>
         <div class="todo">
             <input type="text" id="taskInput" placeholder="Enter task">
+            <input type="text" id="category" placeholder="Category">
+            <input type="date" id="dueDateInput">
+            <select id="priority" name="priority" aria-placeholder="Priority">
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+            </select>
+            <input type="text" id="tags" placeholder="Enter tags (comma separated)">
             <button onclick="addTask()">Add Task</button>
+        </div>
+
+        <div class="filter">
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate">
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate">
+            <button id="filterBtn">Filter</button>
+        </div>
+
+        <div class="filter">
+            <label for="priorityFilter">Priority</label>
+            <select id="priorityFilter" name="priorityFilter" aria-placeholder="Priority">
+                <option value="None">None</option>
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+            </select>
+            <button id="filterprioBtn">Filter</button>
+        </div>
+
+        <div class="filter">
+            <label for="categoryFilter">category</label>
+            <input type="text" id="categoryFilter" placeholder="Category">
+            <button id="filtercatBtn">Filter</button>
         </div>
 
         <ul id="taskList"></ul>
