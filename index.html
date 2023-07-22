@@ -49,6 +49,18 @@
             <button id="filtercatBtn">Filter</button>
         </div>
 
+        <div class="sort-btn">
+            <button onclick="sortByDueDate()">Sort by Due Date</button>
+            <button onclick="sortByPriority()">Sort by Priority</button>
+        </div>
+
+        <div class="view-btn">
+            <button onclick="viewPendingMissedTasks()">View Pending/Missed Tasks</button>
+        </div>
+
+        <div class="view-btn">
+            <button onclick="fetchTasksFromLocalStorage()">View All Tasks</button>
+        </div>
         <ul id="taskList"></ul>
 
 

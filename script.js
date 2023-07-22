@@ -124,6 +124,69 @@ function filterTasksByCategory() {
     }
 }
 
+
+// Function to sort the tasks based on due date
+function sortByDueDate() {
+    const dateSortTasks = tasks.sort((a, b) => {
+        // Sort by due date (if due date is not provided, it will be pushed to the bottom)
+        if (a.dueDate && b.dueDate) {
+            return new Date(a.dueDate) - new Date(b.dueDate);
+        } else if (a.dueDate) {
+            return -1;
+        } else if (b.dueDate) {
+            return 1;
+        }
+
+        // If both due date and priority are not provided, maintain the original order
+        return 0;
+    });
+
+    updateTaskList(dateSortTasks);
+}
+
+// Function to sort the tasks based on priority
+function sortByPriority() {
+    const prioritySortTasks = tasks.sort((a, b) => {
+        // Sort by priority (if priority is not provided, it will be pushed to the bottom)
+        if (a.priority && b.priority) {
+            const priorityOrder = ["Low", "Medium", "High"];
+            return priorityOrder.indexOf(a.priority) - priorityOrder.indexOf(b.priority);
+        } else if (a.priority) {
+            return -1;
+        } else if (b.priority) {
+            return 1;
+        }
+
+        // If both due date and priority are not provided, maintain the original order
+        return 0;
+    });
+
+    updateTaskList(prioritySortTasks);
+}
+
+// Function to view pending or missed tasks
+function viewPendingMissedTasks() {
+    const currentDate = new Date();
+    const pendingMissedTasks = tasks.filter((task) => {
+        if (task.dueDate) {
+            const dueDate = new Date(task.dueDate);
+            return !task.done && dueDate < currentDate;
+        }
+        return false;
+    });
+
+    if (pendingMissedTasks.length === 0) {
+        alert("There are no pending or missed tasks.");
+    } else {
+        updateTaskList(pendingMissedTasks);
+    }
+}
+
+// Function to reset the task list to display all tasks
+function viewAllTasks() {
+    fetchTasksFromLocalStorage();
+}
+
 // Function to update the task list in the UI
 function updateTaskList(filteredTasks = tasks) {
     taskList.innerHTML = "";
