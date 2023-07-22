@@ -14,11 +14,50 @@ h1 {
     text-align: center;
 }
 
+h3 {
+    margin: 0;
+}
+
 .todo {
     display: flex;
+    flex-direction: column;
     gap: 10px;
     margin-bottom: 20px;
 }
+
+.todo1,
+.todo2,
+.priorityFilter,
+.categoryFilter,
+.searchContainer {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.filter {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    background-color: #fff7d7;
+    align-items: center;
+    padding: 10px 10px;
+}
+
+.sort-btn {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #fff7d7;
+    margin-bottom: 20px;
+}
+
+.searchContainer {
+    justify-content: space-between;
+    background-color: #fff7d7;
+    padding: 10px;
+}
+
 
 input[type="text"] {
     flex: 1;

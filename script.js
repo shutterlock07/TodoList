@@ -6,6 +6,8 @@ const categoryInput = document.getElementById("category")
 const tagsInput = document.getElementById("tags")
 
 let tasks = [];
+let activityLog = [];
+
 
 // formatting date 
 function formatDate(dateString) {
@@ -25,6 +27,51 @@ function formatDate(dateString) {
     return `${year}-${month}-${day}`;
 }
 
+// Function to parse the due date from the task text (date only)
+function parseDueDate(taskText) {
+    const currentDate = new Date();
+    const tomorrow = new Date(currentDate.getTime() + 24 * 60 * 60 * 1000);
+
+    const keywords = {
+        today: currentDate.toLocaleDateString(),
+        tomorrow: tomorrow.toLocaleDateString(),
+    };
+
+    const dateRegex = /(\d{1,2}(?:st|nd|rd|th)?\s(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s\d{4})/gi;
+    const dateMatches = taskText.match(dateRegex);
+
+    if (dateMatches) {
+        return new Date(dateMatches[0]).toLocaleDateString();
+    }
+
+    const dueDateKeyword = Object.keys(keywords).find((keyword) =>
+        taskText.toLowerCase().includes(keyword)
+    );
+    if (dueDateKeyword) {
+        return keywords[dueDateKeyword];
+    }
+
+    return null; // Return null if no due date is found
+}
+
+// Function to add a log entry to the activity log
+function addToActivityLog(logEntry) {
+    activityLog.push(logEntry);
+    updateActivityLogUI();
+}
+
+// Function to update the activity log in the UI
+function updateActivityLogUI() {
+    const logList = document.getElementById("logList");
+    logList.innerHTML = "";
+
+    activityLog.forEach((entry) => {
+        const listItem = document.createElement("li");
+        listItem.textContent = `${entry.timestamp} - ${entry.message}`;
+        logList.appendChild(listItem);
+    });
+}
+
 
 // Function to add a task to the todo list
 function addTask() {
@@ -34,10 +81,22 @@ function addTask() {
     const cat = categoryInput.value.trim();
     const tags = tagsInput.value.trim().split(",");
 
+    // Parse the due date from the task text if no due date is specified
+    if (!dueDate && taskText) {
+        const parsedDueDate = parseDueDate(taskText);
+        if (parsedDueDate) {
+            dueDateInput.value = parsedDueDate;
+            taskInput.value = taskText
+                .replace(/(today|tomorrow|\d{1,2}(?:st|nd|rd|th)?\s(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s\d{4})/gi, "")
+                .trim();
+        }
+    }
+
+
     if (taskText !== "") {
         const task = {
             text: taskText,
-            done: done,
+            done: false,
             dueDate: formatDate(dueDate),
             priority: priority,
             category: cat,
@@ -45,19 +104,32 @@ function addTask() {
         };
         tasks.push(task);
         updateTaskList();
+        saveTasksToLocalStorage();
         taskInput.value = "";
         dueDateInput.value = formatDate();
         priorityInput.value = "Medium";
         categoryInput.value = "";
         tagsInput.value = "";
     }
+
+    addToActivityLog({
+        timestamp: new Date().toLocaleString(),
+        message: `Task "${taskText}" added.`,
+    });
 }
 
 
 // Function to remove a task from the todo list
 function removeTask(index) {
+    addToActivityLog({
+        timestamp: new Date().toLocaleString(),
+        message: `Task "${tasks[index].text}" deleted.`,
+    });
     tasks.splice(index, 1);
+
     updateTaskList();
+
+
 }
 
 // Function to edit a task in the todo list
@@ -72,7 +144,14 @@ function editTask(index) {
 // Function to toggle done/undone for the task
 function statusToggle(index) {
     tasks[index].done = !tasks[index].done;
+    addToActivityLog({
+        timestamp: new Date().toLocaleString(),
+        message: `Task "${tasks[index].text}" marked as ${tasks[index].done ? "complete" : "incomplete"}.`,
+    });
+    saveTasksToLocalStorage();
     updateTaskList();
+
+
 }
 
 
@@ -190,6 +269,7 @@ function viewAllTasks() {
 // Function to search
 function searchTodo() {
     const searchQuery = searchInput.value.trim().toLowerCase();
+    searchInput.value = ""
     if (searchQuery === "") {
         alert("Please enter a search term.");
         return;
@@ -199,7 +279,7 @@ function searchTodo() {
         const taskTextLower = task.text.toLowerCase();
         // const hasSubtask = task.subtasks && task.subtasks.some((subtask) => subtask.text.toLowerCase().includes(searchQuery));
         const hasTag = task.tags && task.tags.some((tag) => tag.toLowerCase().includes(searchQuery));
-        return taskTextLower.includes(searchQuery) || hasSubtask || hasTag;
+        return taskTextLower.includes(searchQuery) || hasTag;
     });
 
     if (searchResults.length === 0) {

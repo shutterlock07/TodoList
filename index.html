@@ -12,64 +12,88 @@
     <div class="container">
         <h1>Todo App</h1>
         <div class="todo">
-            <input type="text" id="taskInput" placeholder="Enter task">
-            <input type="text" id="category" placeholder="Category">
-            <input type="date" id="dueDateInput">
-            <select id="priority" name="priority" aria-placeholder="Priority">
-                <option value="High">High</option>
-                <option value="Medium">Medium</option>
-                <option value="Low">Low</option>
-            </select>
-            <input type="text" id="tags" placeholder="Enter tags (comma separated)">
-            <button onclick="addTask()">Add Task</button>
+            <div class="todo1">
+                <input type="text" id="taskInput" placeholder="Enter task">
+                <input type="date" id="dueDateInput">
+                <select id="priority" name="priority" aria-placeholder="Priority">
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                </select>
+            </div>
+            <div class="todo2">
+                <input type="text" id="category" placeholder="Category">
+                <input type="text" id="tags" placeholder="Enter tags (comma separated)">
+                <button onclick="addTask()">Add Task</button>
+            </div>
+
+
         </div>
 
         <div class="filter">
-            <label for="startDate">Start Date:</label>
-            <input type="date" id="startDate">
-            <label for="endDate">End Date:</label>
-            <input type="date" id="endDate">
+            <h3>Filter Options</h3>
+            <div>
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate">
+            </div>
+            <div>
+                <label for="endDate">End Date:</label>
+                <input type="date" id="endDate">
+            </div>
+
             <button id="filterBtn">Filter</button>
         </div>
 
         <div class="filter">
-            <label for="priorityFilter">Priority</label>
-            <select id="priorityFilter" name="priorityFilter" aria-placeholder="Priority">
-                <option value="None">None</option>
-                <option value="High">High</option>
-                <option value="Medium">Medium</option>
-                <option value="Low">Low</option>
-            </select>
-            <button id="filterprioBtn">Filter</button>
+            <div class="priorityFilter">
+                <label for="priorityFilter">Priority</label>
+                <select id="priorityFilter" name="priorityFilter" aria-placeholder="Priority">
+                    <option value="None">None</option>
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                </select>
+                <button id="filterprioBtn">Filter</button>
+            </div>
+
+            <div class="categoryFilter">
+                <label for="categoryFilter">Category</label>
+                <input type="text" id="categoryFilter" placeholder="Category">
+                <button id="filtercatBtn">Filter</button>
+            </div>
         </div>
 
-        <div class="filter">
-            <label for="categoryFilter">category</label>
-            <input type="text" id="categoryFilter" placeholder="Category">
-            <button id="filtercatBtn">Filter</button>
-        </div>
+
 
         <div class="sort-btn">
+            <h3>Sorting Options</h3>
             <button onclick="sortByDueDate()">Sort by Due Date</button>
             <button onclick="sortByPriority()">Sort by Priority</button>
-        </div>
-
-        <div class="view-btn">
-            <button onclick="viewPendingMissedTasks()">View Pending/Missed Tasks</button>
-        </div>
-
-        <div class="view-btn">
-            <button onclick="fetchTasksFromLocalStorage()">View All Tasks</button>
+            <div class="view-btn">
+                <button onclick="viewPendingMissedTasks()">View Pending/Missed Tasks</button>
+            </div>
         </div>
 
 
-        <div class="search">
-            <input type="text" id="searchInput" placeholder="Search tasks...">
-            <button onclick="searchTodo()">Search Task</button>
+        <div class="searchContainer">
+            <div class="view-btn">
+                <button onclick="fetchTasksFromLocalStorage()">View All Tasks</button>
+            </div>
+
+
+            <div class="search">
+                <input type="text" id="searchInput" placeholder="Search tasks...">
+                <button onclick="searchTodo()">Search Task</button>
+            </div>
         </div>
+
 
         <ul id="taskList" class="task-list"></ul>
 
+        <div class="activity-log" id="activityLog">
+            <h2>Activity Log</h2>
+            <ul id="logList"></ul>
+        </div>
 
     </div>
 
