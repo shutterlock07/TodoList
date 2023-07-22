@@ -37,7 +37,7 @@ function addTask() {
     if (taskText !== "") {
         const task = {
             text: taskText,
-            done: false,
+            done: done,
             dueDate: formatDate(dueDate),
             priority: priority,
             category: cat,
@@ -185,6 +185,28 @@ function viewPendingMissedTasks() {
 // Function to reset the task list to display all tasks
 function viewAllTasks() {
     fetchTasksFromLocalStorage();
+}
+
+// Function to search
+function searchTodo() {
+    const searchQuery = searchInput.value.trim().toLowerCase();
+    if (searchQuery === "") {
+        alert("Please enter a search term.");
+        return;
+    }
+
+    const searchResults = tasks.filter((task) => {
+        const taskTextLower = task.text.toLowerCase();
+        // const hasSubtask = task.subtasks && task.subtasks.some((subtask) => subtask.text.toLowerCase().includes(searchQuery));
+        const hasTag = task.tags && task.tags.some((tag) => tag.toLowerCase().includes(searchQuery));
+        return taskTextLower.includes(searchQuery) || hasSubtask || hasTag;
+    });
+
+    if (searchResults.length === 0) {
+        alert("No matching tasks found.");
+    } else {
+        updateTaskList(searchResults);
+    }
 }
 
 // Function to update the task list in the UI

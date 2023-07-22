@@ -61,7 +61,14 @@
         <div class="view-btn">
             <button onclick="fetchTasksFromLocalStorage()">View All Tasks</button>
         </div>
-        <ul id="taskList"></ul>
+
+
+        <div class="search">
+            <input type="text" id="searchInput" placeholder="Search tasks...">
+            <button onclick="searchTodo()">Search Task</button>
+        </div>
+
+        <ul id="taskList" class="task-list"></ul>
 
 
     </div>
