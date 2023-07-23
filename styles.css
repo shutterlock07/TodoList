@@ -51,7 +51,11 @@ h3 {
     justify-content: space-between;
     padding: 10px;
     background-color: #fff7d7;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+}
+
+.categoryFilter {
+    margin-right: 10px;
 }
 
 .searchContainer {
